@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Character Counter</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom,#041a53,#163583);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:#031f67;
+    border:2px solid #1b3371;
+    box-shadow:0 0 10px rgba(87, 110, 162, 0.4);
+    width:500px;
+    padding:40px;
+    border-radius:25px;
+   
+}
+.container:hover{
+box-shadow:
+0 0 12px #7796e3,
+0 0 25px #3a4a72;
+}
+
+h1{
+    text-align:center;
+    color:#c7cff0;
+}
+
+.limit{
+    text-align:center;
+    margin-bottom:20px;
+    color:#7cd8e0;
+}
+
+textarea{
+width:95%;
+height:140px;
+padding:15px;
+border-radius:12px;
+border:2px solid #173170;
+background:#a4b6ec;
+color:white;
+font-size:15px;
+resize:none;
+outline:none;
+
+box-shadow:0 0 8px #041a53;
+}
+
+.counter-box{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    font-weight:bold;
+    color:#5a88b9;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#115799;
+    color:white;
+    box-shadow:0 0 8px #0d2944;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.warning{
+    color:red;
+    margin-top:5px;
+    font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Smart Character Counter</h1>
+
+<p class="limit">200 characters max</p>
+
+<textarea id="message" placeholder="Start typing your message..."></textarea>
+
+<div class="counter-box">
+<span id="typed">0/200 characters</span>
+<span id="remaining">Remaining: 200</span>
+</div>
+
+<p id="warning" class="warning"></p>
+
+<button>Submit Message</button>
+
+</div>
+
+<script>
+
+const textarea = document.getElementById("message");
+const typed = document.getElementById("typed");
+const remaining = document.getElementById("remaining");
+const warning = document.getElementById("warning");
+
+const maxLength = 200;
+
+textarea.addEventListener("input", function(){
+
+let textLength = textarea.value.length;
+
+if(textLength > maxLength){
+textarea.value = textarea.value.substring(0,maxLength);
+textLength = maxLength;
+warning.textContent = "You cannot type more than 200 characters!";
+}
+else{
+warning.textContent = "";
+}
+
+typed.textContent = textLength + "/200 characters";
+remaining.textContent = "Remaining: " + (maxLength - textLength);
+
+});
+
+</script>
+
+</body>
+</html>
